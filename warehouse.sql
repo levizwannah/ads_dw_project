@@ -55,8 +55,8 @@ create table `dimPartner`(
      FOREIGN KEY (`theme_type_id`) REFERENCES `dimLoanThemeType`(`theme_type_id`) 
 )
 
--- loan theme grant
-create table `dimLoanThemeGrant`(
+-- loan theme grant fact --
+create table `factLoanThemeGrant`(
     `loan_theme_grant_id` bigint unsigned not null primary key AUTO_INCREMENT,
     `location_id` bigint unsigned not null,
     `t_partner_id` bigint unsigned not null,
@@ -66,9 +66,52 @@ create table `dimLoanThemeGrant`(
     FOREIGN KEY (`t_patner_id`) REFERENCES `dimPartner`(`t_partner_id`),
 );
 
---
+-- time dimenstion table --
+create table `dimTime`(
+    `time_id` BIGINT UNSIGNED not null PRIMARY KEY AUTO_INCREMENT,
+    `date_string` datetime,
+    `year` int unsigned not null,
+    `month` int unsigned not null,
+    `month_string` varchar(12) not null,
+    `day` int unsigned not null,
+    `day_string` varchar(12) 
+);
 
+-- sector dimenstion --
 
+create table `dimSector`(
+    `sector_id` BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `sector_name` varchar(500) not null
+);
+
+-- Loan dimension --
+
+create table `dimLoan`(
+    `loan_id` BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `activity` varchar(1500)
+    `sector_id` BIGINT UNSIGNED NOT NULL,
+    `currency` varchar(15) NOT NULL,
+    `borrower_gender` varchar(15),
+    FOREIGN KEY (`sector_id`) REFERENCES `dimSector`(`sector_id`)
+)
+
+-- fact loan grants
+
+create table `factLoanGrant`(
+    `loan_grant_id` BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `loan_id` BIGINT UNSIGNED NOT NULL,
+    `location_id` BIGINT UNSIGNED NOT NULL,
+    `partner_id` BIGINT UNSIGNED NOT NULL,
+    `time_id` BIGINT UNSIGNED NOT NULL,
+    `loan_amount`  INT UNSIGNED NOT NULL,
+    `funded_amount` INT UNSIGNED NOT NULL,
+    `lender_count` INT UNSIGNED NOT NULL,
+    `term_in_months` INT UNSIGNED NOT NULL,
+    FOREIGN KEY(`loan_id`) REFERENCES `dimLoan`(`loan_id`),
+    FOREIGN KEY(`location_id`) REFERENCES `dimLocation`(`location_id`),
+    FOREIGN KEY(`partner_id`) REFERENCES `dimPartner`(`t_partner_id`),
+    FOREIGN KEY(`time_id`) REFERENCES `dimTime`(`time_id`)
+);
 
 
 
