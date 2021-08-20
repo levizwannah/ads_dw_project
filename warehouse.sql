@@ -53,7 +53,7 @@ create table `dimPartner`(
     `theme_type_id` BIGINT UNSIGNED NOT NULL,
     
      FOREIGN KEY (`theme_type_id`) REFERENCES `dimLoanThemeType`(`theme_type_id`) 
-)
+);
 
 -- loan theme grant fact --
 create table `factLoanThemeGrant`(
@@ -63,7 +63,7 @@ create table `factLoanThemeGrant`(
     `loan_theme_number` int,
     `loan_theme_amount` float not null,
     FOREIGN KEY (`location_id`) REFERENCES `dimLocation`(`location_id`),
-    FOREIGN KEY (`t_patner_id`) REFERENCES `dimPartner`(`t_partner_id`)
+    FOREIGN KEY (`t_partner_id`) REFERENCES `dimPartner`(`t_partner_id`)
 );
 
 -- time dimenstion table --
@@ -93,7 +93,7 @@ create table `dimLoan`(
     `currency` varchar(15) NOT NULL,
     `borrower_gender` varchar(15),
     FOREIGN KEY (`sector_id`) REFERENCES `dimSector`(`sector_id`)
-)
+);
 
 -- fact loan grants
 
