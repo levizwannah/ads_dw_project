@@ -34,8 +34,8 @@ create table `dimLocation`(
     `long` float ,
     `location_name` varchar(1000) not null,
     `mpi` float not null,
-     FOREIGN KEY (`country_id`) REFERENCES `dimCountry`(`country_id`),
-     FOREIGN KEY (`region_id`) REFERENCES `dimRegion`(`region_id`),
+     FOREIGN KEY (`country_id`) REFERENCES `dimCountry`(`country_id`)ON DELETE CASCADE,
+     FOREIGN KEY (`region_id`) REFERENCES `dimRegion`(`region_id`)ON DELETE CASCADE,
      FOREIGN KEY (`w_region_id`) REFERENCES `dimWorldRegion`(`w_region_id`) ON DELETE CASCADE
 );
 
@@ -62,7 +62,7 @@ create table `factLoanThemeGrant`(
     `t_partner_id` bigint unsigned not null,
     `loan_theme_number` int,
     `loan_theme_amount` float not null,
-    FOREIGN KEY (`location_id`) REFERENCES `dimLocation`(`location_id`),
+    FOREIGN KEY (`location_id`) REFERENCES `dimLocation`(`location_id`)ON DELETE CASCADE,
     FOREIGN KEY (`t_partner_id`) REFERENCES `dimPartner`(`t_partner_id`) ON DELETE CASCADE
 );
 
@@ -107,9 +107,9 @@ create table `factLoanGrant`(
     `funded_amount` INT UNSIGNED NOT NULL,
     `lender_count` INT UNSIGNED NOT NULL,
     `term_in_months` INT UNSIGNED NOT NULL,
-    FOREIGN KEY(`loan_id`) REFERENCES `dimLoan`(`loan_id`),
-    FOREIGN KEY(`location_id`) REFERENCES `dimLocation`(`location_id`),
-    FOREIGN KEY(`partner_id`) REFERENCES `dimPartner`(`t_partner_id`),
+    FOREIGN KEY(`loan_id`) REFERENCES `dimLoan`(`loan_id`)ON DELETE CASCADE,
+    FOREIGN KEY(`location_id`) REFERENCES `dimLocation`(`location_id`)ON DELETE CASCADE,
+    FOREIGN KEY(`partner_id`) REFERENCES `dimPartner`(`t_partner_id`)ON DELETE CASCADE,
     FOREIGN KEY(`time_id`) REFERENCES `dimTime`(`time_id`) ON DELETE CASCADE
 );
 
