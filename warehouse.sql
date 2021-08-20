@@ -22,7 +22,7 @@ create table `dimRegion`(
 create TABLE `dimWorldRegion`(
     `w_region_id` BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `w_region_name` varchar(300) not null
-)
+);
 
 -- Location dimension
 create table `dimLocation`(
