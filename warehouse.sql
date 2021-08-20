@@ -9,7 +9,7 @@ use kiva_dw;
 create table `dimCountry`(
     `country_id` int unsigned not null PRIMARY key AUTO_INCREMENT,
     `iso_code` varchar(100) not null,
-    `country_name` varchar(255) not null,
+    `country_name` varchar(255) not null
 );
 
 -- Region dimension --
@@ -63,7 +63,7 @@ create table `factLoanThemeGrant`(
     `loan_theme_number` int,
     `loan_theme_amount` float not null,
     FOREIGN KEY (`location_id`) REFERENCES `dimLocation`(`location_id`),
-    FOREIGN KEY (`t_patner_id`) REFERENCES `dimPartner`(`t_partner_id`),
+    FOREIGN KEY (`t_patner_id`) REFERENCES `dimPartner`(`t_partner_id`)
 );
 
 -- time dimenstion table --
@@ -88,7 +88,7 @@ create table `dimSector`(
 
 create table `dimLoan`(
     `loan_id` BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `activity` varchar(1500)
+    `activity` varchar(1500),
     `sector_id` BIGINT UNSIGNED NOT NULL,
     `currency` varchar(15) NOT NULL,
     `borrower_gender` varchar(15),
