@@ -36,7 +36,7 @@ create table `dimLocation`(
     `mpi` float not null,
      FOREIGN KEY (`country_id`) REFERENCES `dimCountry`(`country_id`),
      FOREIGN KEY (`region_id`) REFERENCES `dimRegion`(`region_id`),
-     FOREIGN KEY (`w_region_id`) REFERENCES `dimWorldRegion`(`w_region_id`)
+     FOREIGN KEY (`w_region_id`) REFERENCES `dimWorldRegion`(`w_region_id`) ON DELETE CASCADE
 );
 
 -- Loan theme type --
@@ -52,7 +52,7 @@ create table `dimPartner`(
     `partner_name` varchar(300),
     `theme_type_id` BIGINT UNSIGNED NOT NULL,
     
-     FOREIGN KEY (`theme_type_id`) REFERENCES `dimLoanThemeType`(`theme_type_id`) 
+     FOREIGN KEY (`theme_type_id`) REFERENCES `dimLoanThemeType`(`theme_type_id`)ON DELETE CASCADE 
 );
 
 -- loan theme grant fact --
@@ -63,7 +63,7 @@ create table `factLoanThemeGrant`(
     `loan_theme_number` int,
     `loan_theme_amount` float not null,
     FOREIGN KEY (`location_id`) REFERENCES `dimLocation`(`location_id`),
-    FOREIGN KEY (`t_partner_id`) REFERENCES `dimPartner`(`t_partner_id`)
+    FOREIGN KEY (`t_partner_id`) REFERENCES `dimPartner`(`t_partner_id`) ON DELETE CASCADE
 );
 
 -- time dimenstion table --
@@ -92,7 +92,7 @@ create table `dimLoan`(
     `sector_id` BIGINT UNSIGNED NOT NULL,
     `currency` varchar(15) NOT NULL,
     `borrower_gender` varchar(15),
-    FOREIGN KEY (`sector_id`) REFERENCES `dimSector`(`sector_id`)
+    FOREIGN KEY (`sector_id`) REFERENCES `dimSector`(`sector_id`) ON DELETE CASCADE
 );
 
 -- fact loan grants
@@ -110,7 +110,7 @@ create table `factLoanGrant`(
     FOREIGN KEY(`loan_id`) REFERENCES `dimLoan`(`loan_id`),
     FOREIGN KEY(`location_id`) REFERENCES `dimLocation`(`location_id`),
     FOREIGN KEY(`partner_id`) REFERENCES `dimPartner`(`t_partner_id`),
-    FOREIGN KEY(`time_id`) REFERENCES `dimTime`(`time_id`)
+    FOREIGN KEY(`time_id`) REFERENCES `dimTime`(`time_id`) ON DELETE CASCADE
 );
 
 
