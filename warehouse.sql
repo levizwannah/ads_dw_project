@@ -102,7 +102,9 @@ create table `factLoanGrant`(
     `loan_id` BIGINT UNSIGNED NOT NULL,
     `location_id` BIGINT UNSIGNED NOT NULL,
     `partner_id` BIGINT UNSIGNED NOT NULL,
-    `time_id` BIGINT UNSIGNED NOT NULL,
+    `funded_time_id` BIGINT UNSIGNED NOT NULL,
+    `posted_time_id` BIGINT UNSIGNED NOT NULL,
+    `disbursed_time_id` BIGINT UNSIGNED NOT NULL,
     `loan_amount`  INT UNSIGNED NOT NULL,
     `funded_amount` INT UNSIGNED NOT NULL,
     `lender_count` INT UNSIGNED NOT NULL,
@@ -110,8 +112,9 @@ create table `factLoanGrant`(
     FOREIGN KEY(`loan_id`) REFERENCES `dimLoan`(`loan_id`)ON DELETE CASCADE,
     FOREIGN KEY(`location_id`) REFERENCES `dimLocation`(`location_id`)ON DELETE CASCADE,
     FOREIGN KEY(`partner_id`) REFERENCES `dimPartner`(`t_partner_id`)ON DELETE CASCADE,
-    FOREIGN KEY(`time_id`) REFERENCES `dimTime`(`time_id`) ON DELETE CASCADE
+    FOREIGN KEY(`funded_time_id`) REFERENCES `dimTime`(`time_id`) ON DELETE CASCADE
+    FOREIGN KEY(`posted_time_id`) REFERENCES `dimTime`(`time_id`) ON DELETE CASCADE
+    FOREIGN KEY(`disbursed_time_id`) REFERENCES `dimTime`(`time_id`) ON DELETE CASCADE
 );
-
 
 
